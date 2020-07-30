@@ -31,6 +31,12 @@ class TodoList extends React.Component{
       inputValue:e.target.value
     })
   }
+  handleItemClick(index){
+    const list = [...this.state.list];
+    list.splice(index, 1);
+    this.setState({list})
+  }
+
   render(){
     //jsx语法：在{}中可以写js表达式*只能是表达式语句会报错，也可直接用尖括号
     //jsx语法：只能return一个标签即最外层是一个div
@@ -44,7 +50,7 @@ class TodoList extends React.Component{
         <ul>
           {
             this.state.list.map((item, index) => {
-            return <li key={index}>{item}</li>
+            return <li key={index} onClick={this.handleItemClick.bind(this, index)}>{item}</li>
             })}
         </ul>
       </div>
