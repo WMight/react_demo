@@ -19,6 +19,9 @@ class TodoList extends React.Component{
       list:[],
       inputValue:''
     }
+    this.handleBtnChange = this.handleBtnChange.bind(this);
+    this.handleBtnClick = this.handleBtnClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleBtnClick(){
@@ -42,6 +45,21 @@ class TodoList extends React.Component{
     list.splice(index, 1);
     this.setState({list})
   }
+  getTodoItems(){
+    return (
+      this.state.list.map((item, index) => {
+        return (
+        <TodoItem 
+          content={item} 
+          key={index} 
+          index={index} 
+          handleDelete={this.handleDelete}
+          />
+        )//父组件通过属性形势向子组件传参
+        // return <li key={index} onClick={this.handleItemClick.bind(this, index)}>{item}</li>
+      })
+    )
+  }
 
   render(){
     //jsx语法：在{}中可以写js表达式*只能是表达式语句会报错，也可直接用尖括号
@@ -50,16 +68,10 @@ class TodoList extends React.Component{
     return (
       <div>
         <div>
-          <input value={this.state.inputValue} onChange={this.handleBtnChange.bind(this)}/>
-          <button onClick={this.handleBtnClick.bind(this)}>add</button>
+          <input value={this.state.inputValue} onChange={this.handleBtnChange}/>
+          <button onClick={this.handleBtnClick}>add</button>
         </div>
-        <ul>
-          {
-            this.state.list.map((item, index) => {
-              return <TodoItem content={item} key={index} index={index} handleDelete={this.handleDelete.bind(this)}/>//父组件通过属性形势向子组件传参
-              // return <li key={index} onClick={this.handleItemClick.bind(this, index)}>{item}</li>
-            })}
-        </ul>
+        <ul>{this.getTodoItems()}</ul>
       </div>
     );
   }
