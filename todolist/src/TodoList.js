@@ -32,7 +32,12 @@ class TodoList extends React.Component{
       inputValue:e.target.value
     })
   }
-  handleItemClick(index){
+  // handleItemClick(index){
+  //   const list = [...this.state.list];
+  //   list.splice(index, 1);
+  //   this.setState({list})
+  // }
+  handleDelete(index){
     const list = [...this.state.list];
     list.splice(index, 1);
     this.setState({list})
@@ -51,7 +56,7 @@ class TodoList extends React.Component{
         <ul>
           {
             this.state.list.map((item, index) => {
-              return <TodoItem content={item} key={index}/>//父组件通过属性形势向子组件传参
+              return <TodoItem content={item} key={index} index={index} handleDelete={this.handleDelete.bind(this)}/>//父组件通过属性形势向子组件传参
               // return <li key={index} onClick={this.handleItemClick.bind(this, index)}>{item}</li>
             })}
         </ul>
