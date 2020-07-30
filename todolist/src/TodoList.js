@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component , Fragment} from 'react';
 import TodoItem from './TodoItem'
 
 //定义一个react组件
@@ -11,7 +11,7 @@ import TodoItem from './TodoItem'
 // }
 //定义一个react组件必须有render()显示内容，一个App类继承react.component
 //export 导出出去才能在别的中用import 导入
-class TodoList extends React.Component{
+class TodoList extends Component{
   
   constructor(props){
     super(props);
@@ -65,14 +65,15 @@ class TodoList extends React.Component{
     //jsx语法：在{}中可以写js表达式*只能是表达式语句会报错，也可直接用尖括号
     //jsx语法：只能return一个标签即最外层是一个div
     //原生事件是onclick小写，事件绑定是大写的C; this指这个组件
+    //行内样式：style={{background:'red', color:'#fff'}}
     return (
-      <div>
+      <Fragment>
         <div>
           <input value={this.state.inputValue} onChange={this.handleBtnChange}/>
-          <button onClick={this.handleBtnClick}>add</button>
+          <button className='btn-color'  onClick={this.handleBtnClick}>add</button>
         </div>
         <ul>{this.getTodoItems()}</ul>
-      </div>
+      </Fragment>
     );
   }
 }
